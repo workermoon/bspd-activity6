@@ -1,0 +1,33 @@
+services:
+  moonginx:
+    # container_name: moonginx-container
+    image: nginx:latest
+    ports:
+      - "80"
+    volumes:
+      - datavol1:/v1
+      - datavol2:/v2
+    networks:
+      - moonetwork
+
+  moonapache:
+    container_name: moonapache-container
+    image: php:8.0-apache
+    ports:
+      - "8090:80"
+    volumes:
+      - datavol1:/v1
+      - datavol2:/v2
+    networks:
+      - moonetwork
+
+volumes: 
+  datavol1:
+    name: datavol1 
+  datavol2:
+    name: datavol2
+
+networks:
+  moonetwork:
+    name: moonetwork
+    driver: bridge
